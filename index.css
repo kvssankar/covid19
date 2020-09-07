@@ -1,0 +1,19 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.chart--container {
+  min-height: 530px;
+  width: 100%;
+  height: 100%;
+}
+
+.zc-ref {
+  display: none;
+}
+
+.listy {
+  width: 50%;
+  margin-left: 30%;
+  margin-top: 50px;
+}
