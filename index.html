@@ -23,12 +23,11 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ["Task", "Hours per Day"],
-          ["Work", 11],
-          ["Eat", 2],
-          ["Commute", 2],
-          ["Watch TV", 2],
-          ["Sleep", 7],
+          ["Global", "Cases"],
+          ["Conformed cases", 11],
+          ["Active", 2],
+          ["Cured", 2],
+          ["Deaths", 2],
         ]);
 
         var options = {
@@ -48,11 +47,25 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ["Year", "Sales", "Expenses"],
-          ["2013", 1000, 400],
-          ["2014", 1170, 460],
-          ["2015", 660, 1120],
-          ["2016", 1030, 540],
+          ["States", "Cured", "Deaths"],
+          ["Andhra phradesh", 1000, 400],
+          ["Tamil nadu", 1170, 460],
+          ["Maharastra", 660, 1120],
+          ["Kerala", 1140, 540],
+          ["Bihar", 1450, 140],
+          ["Chhattisgarh", 1350, 240],
+          ["Haryana", 1053, 340],
+          ["Himachal ", 1440, 740],
+          ["Goa", 1053, 580],
+          ["Manipur", 1670, 560],
+          ["Meghalaya", 1345, 640],
+          ["Arunachal", 1034, 570],
+          ["Kashmir", 1563, 840],
+          ["Haryana", 1045, 940],
+          ["Rajastan", 1450, 570],
+          ["Gujarat", 1056, 840],
+          ["Mizoram", 1068, 580],
+          ["Andaman", 1034, 570],
         ]);
 
         var options = {
@@ -79,12 +92,12 @@
         display: none;
       }
     </style>
-    <title>Document</title>
+    <title>CovidStats</title>
   </head>
   <body>
     <nav class="navbar fixed-top navbar-dark bg-dark">
-      <a class="navbar-brand">Navbar</a>
-      <span class="navbar-text">GO corona go</span>
+      <a class="navbar-brand">CovidStats</a>
+      <span class="navbar-text">All you need to know!!</span>
     </nav>
     <div class="jumbotron">
       <h1 class="display-4">Hello busy people! 👋 Hope you're safe 🦸‍♂️</h1>
@@ -169,11 +182,22 @@
     <div id="india" class="chart--container"></div>
 
     <ul class="list-group listy">
-      <li class="list-group-item active">active</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Morbi leo risus</li>
-      <li class="list-group-item">Porta ac consectetur ac</li>
-      <li class="list-group-item">Vestibulum at eros</li>
+      <li class="list-group-item active">DO's and DON'Ts</li>
+      <li class="list-group-item">
+        Wash your hands regularly for 20 seconds, with soap and water or
+        alcohol-based hand rub ✋ 🧼 🚰
+      </li>
+      <li class="list-group-item">
+        Avoid close contact (1 meter or 3 feet) with people who are unwell 🙏 😷
+        🚶‍
+      </li>
+      <li class="list-group-item">
+        Stay home and self-isolate from others in the household if you feel
+        unwell 🏠 👨 💉
+      </li>
+      <li class="list-group-item">
+        Touch your eyes, nose, or mouth if your hands are not clean 👃 👁️ 🤭
+      </li>
     </ul>
 
     <p style="text-align: center; margin: 50px 50px 25px">
@@ -199,45 +223,104 @@
           other medical conditions (such as asthma, diabetes, or heart disease),
           may be more vulnerable to becoming severely ill
         </p>
-        <p>
-          People may experience: cough fever tiredness difficulty breathing
-          (severe cases)
-        </p>
-        <button type="button" class="btn btn-outline-primary">Primary</button>
+        <p>People may experience:</p>
+        <ul>
+          <li>Cough</li>
+          <li>Fever</li>
+          <li>Triedness</li>
+          <li>Difficulty in breathing</li>
+        </ul>
+        <a href="#" class="btn btn-outline-primary"> Click here to know more</a>
       </div>
     </div>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">State</th>
+          <th scope="col">Confirmed</th>
+          <th scope="col">Active</th>
+          <th scope="col">Cured</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
         </tr>
         <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
         </tr>
       </tbody>
     </table>
-    <div class="alert alert-success" role="alert">
-      A simple success alert—check it out!
+    <div
+      style="width: 65%; margin-left: 20%; margin-top: 70px"
+      class="alert alert-success"
+      role="alert"
+    >
+      <h1><b>Stay Home, Stay Safe!</b></h1>
+      <p>
+        COVID-19 or as the plebs call it, the coronavirus has restricted a lot
+        of us to our homes. You can choose to while away your time sleeping;
+        doing nothing or you could utilize this break to ‘Learn’ something new.
+        You know you’ve said this a lot to yourself - “I want to Learn 'X' but I
+        can’t seem to find the time.” This is the time; Turn Your Self-Isolation
+        into Self-Improvement!
+      </p>
+      <h3>Made with love by</h3>
+      <b>Sankar Nithin Pratyay</b>
     </div>
     <script>
       let chartConfig = {
