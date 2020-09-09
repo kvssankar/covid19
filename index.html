@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://image.flaticon.com/icons/svg/3461/3461722.svg"
+    />
     <link rel="stylesheet" href="index.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
@@ -92,22 +96,44 @@
         display: none;
       }
     </style>
-    <title>CovidStats</title>
+    <title>CovidStats | Home</title>
   </head>
   <body>
-    <nav class="navbar fixed-top navbar-dark bg-dark">
-      <a class="navbar-brand">CovidStats</a>
-      <span class="navbar-text">All you need to know!!</span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Covid Stats</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#"
+            >Home <span class="sr-only">(current)</span></a
+          >
+          <a class="nav-item nav-link" href="self.html">Self assesment</a>
+          <a class="nav-item nav-link" href="form.html">Volunteer</a>
+          <a class="nav-item nav-link" href="contact.html">Contact us</a>
+        </div>
+      </div>
     </nav>
     <div class="jumbotron">
-      <h1 class="display-4">Hello busy people! 👋 Hope you're safe 🦸‍♂️</h1>
+      <h1 style="text-align: center" class="display-4">
+        CovidStats and Healthcare support 🦸‍♂️
+      </h1>
       <p class="lead">
         A true hero is not someone who thinks about doing what is right, but one
         that simply does what is right without thinking. Heroes arent extinct,
         you guys are heros.
       </p>
       <hr class="my-4" />
-      <p>
+      <p style="text-align: center">
         <b
           >Stay at Home, Maintain social distancing and let's fight COVID
           together ✊🏻✊🏻✊🏻</b
@@ -117,6 +143,7 @@
         class="btn btn-primary btn-md"
         href="https://pib.gov.in/PressReleseDetailm.aspx?PRID=1608851"
         role="button"
+        style="margin-left: 43%"
         >Donate to pm cares fund</a
       >
     </div>
