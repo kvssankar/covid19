@@ -18,10 +18,13 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script
       type="text/javascript"
       src="https://www.gstatic.com/charts/loader.js"
     ></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
     <script type="text/javascript">
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
@@ -123,7 +126,7 @@
         </div>
       </div>
     </nav>
-    <div class="jumbotron">
+    <div class="jumbotron" data-aos="zoom-in-up">
       <h1 style="text-align: center" class="display-4">
         CovidStats and Healthcare support 🦸‍♂️
       </h1>
@@ -202,13 +205,18 @@
     </div>
     <div
       id="donutchart"
+      data-aos="fade-up"
       style="margin-left: 25%; width: 900px; height: 500px"
     ></div>
-    <div id="line-chart" style="width: 100%; height: 500px"></div>
+    <div
+      data-aos="zoom-in-down"
+      id="line-chart"
+      style="width: 100%; height: 500px"
+    ></div>
     <h1 style="text-align: center">India wide cases</h1>
-    <div id="india" class="chart--container"></div>
+    <div data-aos="flip-up" id="india" class="chart--container"></div>
 
-    <ul class="list-group listy">
+    <ul data-aos="zoom-in" class="list-group listy">
       <li class="list-group-item active">DO's and DON'Ts</li>
       <li class="list-group-item">
         Wash your hands regularly for 20 seconds, with soap and water or
@@ -270,61 +278,169 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-aos="fade-left">
           <th scope="row">Maharastra</th>
           <td><span class="badge badge-danger">243446</span></td>
           <td><span class="badge badge-success">672556</span></td>
           <td><span class="badge badge-primary">243446</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-right">
           <th scope="row">Tamil Nadu</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">672556</span></td>
           <td><span class="badge badge-primary">243446</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-left">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-right">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-left">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-right">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-left">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-right">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-left">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
           <td><span class="badge badge-primary">672556</span></td>
         </tr>
-        <tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Maharastra</th>
+          <td><span class="badge badge-danger">243446</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-right">
+          <th scope="row">Tamil Nadu</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">672556</span></td>
+          <td><span class="badge badge-primary">243446</span></td>
+        </tr>
+        <tr data-aos="fade-left">
+          <th scope="row">Arunachal pradesh</th>
+          <td><span class="badge badge-danger">943772</span></td>
+          <td><span class="badge badge-success">243446</span></td>
+          <td><span class="badge badge-primary">672556</span></td>
+        </tr>
+        <tr data-aos="fade-right">
           <th scope="row">Arunachal pradesh</th>
           <td><span class="badge badge-danger">943772</span></td>
           <td><span class="badge badge-success">243446</span></td>
@@ -336,6 +452,7 @@
       style="width: 65%; margin-left: 20%; margin-top: 70px"
       class="alert alert-success"
       role="alert"
+      data-aos="zoom-in"
     >
       <h1><b>Stay Home, Stay Safe!</b></h1>
       <p>
@@ -347,7 +464,7 @@
         into Self-Improvement!
       </p>
       <h3>Made with love by</h3>
-      <b>Sankar Nithin Pratyay</b>
+      <b>Sankar, Nitin, Pratyay</b>
     </div>
     <script>
       let chartConfig = {
@@ -473,5 +590,11 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"
     ></script>
+    <script>
+      AOS.init({
+        delay: 100,
+        duration: 800,
+      });
+    </script>
   </body>
 </html>
