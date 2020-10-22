@@ -19,6 +19,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script
       type="text/javascript"
       src="https://www.gstatic.com/charts/loader.js"
@@ -29,23 +30,58 @@
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["Global", "Cases"],
-          ["Conformed cases", 11],
-          ["Active", 2],
-          ["Cured", 2],
-          ["Deaths", 2],
-        ]);
+        axios
+          .get("https://api.covid19api.com/summary")
+          .then((response) => {
+            const a = response.data;
+            //console.log(a);
+            var data = google.visualization.arrayToDataTable([
+              ["Global", "Cases"],
+              ["Conformed cases", a.Global.TotalConfirmed],
+              ["Deaths", a.Global.TotalDeaths],
+              ["Cured", a.Global.TotalRecovered],
+            ]);
 
-        var options = {
-          title: "Global Cases",
-          pieHole: 0.4,
-        };
+            var options = {
+              title: "Global Wide Total Confirmed Cases",
+              pieHole: 0.4,
+            };
 
-        var chart = new google.visualization.PieChart(
-          document.getElementById("donutchart")
-        );
-        chart.draw(data, options);
+            var chart = new google.visualization.PieChart(
+              document.getElementById("donutchart1")
+            );
+            chart.draw(data, options);
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        axios
+          .get("https://api.covid19api.com/summary")
+          .then((response) => {
+            const a = response.data;
+            console.log(a);
+            var data = google.visualization.arrayToDataTable([
+              ["Global", "Cases"],
+              ["Conformed cases", a.Global.NewConfirmed],
+              ["Deaths", a.Global.NewDeaths],
+              ["Cured", a.Global.NewRecovered],
+            ]);
+
+            var options = {
+              title: "Global Wide Newly Confirmed Cases",
+              pieHole: 0.4,
+            };
+
+            var chart = new google.visualization.PieChart(
+              document.getElementById("donutchart2")
+            );
+            chart.draw(data, options);
+          })
+          .catch((error) => console.error(error));
       }
     </script>
     <script type="text/javascript">
@@ -53,38 +89,67 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["States", "Cured", "Deaths"],
-          ["Andhra phradesh", 1000, 400],
-          ["Tamil nadu", 1170, 460],
-          ["Maharastra", 660, 1120],
-          ["Kerala", 1140, 540],
-          ["Bihar", 1450, 140],
-          ["Chhattisgarh", 1350, 240],
-          ["Haryana", 1053, 340],
-          ["Himachal ", 1440, 740],
-          ["Goa", 1053, 580],
-          ["Manipur", 1670, 560],
-          ["Meghalaya", 1345, 640],
-          ["Arunachal", 1034, 570],
-          ["Kashmir", 1563, 840],
-          ["Haryana", 1045, 940],
-          ["Rajastan", 1450, 570],
-          ["Gujarat", 1056, 840],
-          ["Mizoram", 1068, 580],
-          ["Andaman", 1034, 570],
-        ]);
+        axios
+          .get("https://api.covidindiatracker.com/state_data.json")
+          .then((response) => {
+            const a = response.data;
+            var array = [
+              ["States", "Recovered", "Confirmed", "Active", "Deaths"],
+            ];
+            for (var i = 0; i < a.length; i++) {
+              var arr = [];
+              arr.push(a[i].state);
+              arr.push(a[i].recovered);
+              arr.push(a[i].confirmed);
+              arr.push(a[i].active);
+              arr.push(a[i].deaths);
+              array.push(arr);
+            }
+            for (var i = 0; i < a.length - 1; i = i + 2) {
+              var element = `
+                         <tr data-aos="fade-left">
+                          <th scope="row">${a[i].state}</th>
+                          <td><span class="badge badge-danger">${
+                            a[i].deaths
+                          }</span></td>
+                          <td><span class="badge badge-success">${
+                            a[i].active
+                          }</span></td>
+                          <td><span class="badge badge-primary">${
+                            a[i].recovered
+                          }</span></td>
+                        </tr>
+                        <tr data-aos="fade-right">
+                          <th scope="row">${a[i + 1].state}</th>
+                          <td><span class="badge badge-danger">${
+                            a[i + 1].deaths
+                          }</span></td>
+                          <td><span class="badge badge-success">${
+                            a[i + 1].active
+                          }</span></td>
+                          <td><span class="badge badge-primary">${
+                            a[i + 1].recovered
+                          }</span></td>
+                        </tr>
+                        `;
+              var html = $($.parseHTML(element));
+              $("#tabler").append(html);
+            }
+            console.log(array);
+            var data = google.visualization.arrayToDataTable(array);
 
-        var options = {
-          title: "State-wise report cases in India",
-          hAxis: { title: "State", titleTextStyle: { color: "#333" } },
-          vAxis: { minValue: 0 },
-        };
+            var options = {
+              title: "State-wise report cases in India",
+              hAxis: { title: "State", titleTextStyle: { color: "#333" } },
+              vAxis: { minValue: 1000 },
+            };
 
-        var chart = new google.visualization.AreaChart(
-          document.getElementById("line-chart")
-        );
-        chart.draw(data, options);
+            var chart = new google.visualization.AreaChart(
+              document.getElementById("line-chart")
+            );
+            chart.draw(data, options);
+          })
+          .catch((error) => console.error(error));
       }
     </script>
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
@@ -203,18 +268,26 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <div
-      id="donutchart"
-      data-aos="fade-up"
-      style="margin-left: 25%; width: 900px; height: 500px"
-    ></div>
+    <div style="display: flex; justify-content: center; align-items: center">
+      <div
+        id="donutchart1"
+        data-aos="fade-up"
+        style="margin-left: 0; width: 500px; height: 600px"
+      ></div>
+      <div
+        id="donutchart2"
+        data-aos="fade-up"
+        style="margin-left: 0; width: 500px; height: 600px"
+      ></div>
+    </div>
+
     <div
       data-aos="zoom-in-down"
       id="line-chart"
       style="width: 100%; height: 500px"
     ></div>
     <h1 style="text-align: center">India wide cases</h1>
-    <div data-aos="flip-up" id="india" class="chart--container"></div>
+    <div id="india" style="width: 100%; height: 500px"></div>
 
     <ul data-aos="zoom-in" class="list-group listy">
       <li class="list-group-item active">DO's and DON'Ts</li>
@@ -277,176 +350,7 @@
           <th scope="col">Cured</th>
         </tr>
       </thead>
-      <tbody>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Maharastra</th>
-          <td><span class="badge badge-danger">243446</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Tamil Nadu</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">672556</span></td>
-          <td><span class="badge badge-primary">243446</span></td>
-        </tr>
-        <tr data-aos="fade-left">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-        <tr data-aos="fade-right">
-          <th scope="row">Arunachal pradesh</th>
-          <td><span class="badge badge-danger">943772</span></td>
-          <td><span class="badge badge-success">243446</span></td>
-          <td><span class="badge badge-primary">672556</span></td>
-        </tr>
-      </tbody>
+      <tbody id="tabler"></tbody>
     </table>
     <div
       style="width: 65%; margin-left: 20%; margin-top: 70px"
