@@ -33,8 +33,16 @@ var contactSchema=new mongoose.Schema({
     matter:String
 })
 
+var riskpredictor=new mongoose.Schema({
+    name: String,
+    email: String,
+    score:String,
+    matter: String
+})
+
 var user = mongoose.model("user", userSchema);
 var contact = mongoose.model("contact", contactSchema);
+var risk = mongoose.model("risk", riskpredictor);
 
 //connect to mongo
 const connect = mongoose
@@ -96,6 +104,24 @@ app.post("/contactus",function(req,res){
 app.get("/riskpredictor",function(req,res){
     res.sendFile(__dirname+"/riskpredictor.html");
 })
+
+app.post("/riskpredictor",function(req,res){
+    risk.create({
+        name: req.body.name,
+        email: req.body.eaddress,
+        score:req.body.score,
+        matter: req.body.matter
+    },
+    function (err, yolo) {
+        if (err) {
+            console.log("DATA IS NOT PUSHED");
+        } else {
+            console.log("DATA HAS BEEN PUSHED");
+            res.json({"score":req.body.score});
+        }
+    }
+    )
+});
 
 app.get("/contactus",function(req,res){
     res.sendFile(__dirname+"/contact.html");

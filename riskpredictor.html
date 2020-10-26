@@ -60,12 +60,18 @@
     >
       <div class="form-group">
         <label for="exampleFormControlInput1">Name</label>
-        <input type="name" class="form-control" placeholder="sankar kumar" />
+        <input
+          type="name"
+          id="name"
+          class="form-control"
+          placeholder="sankar kumar"
+        />
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Email address</label>
         <input
           type="email"
+          id="email"
           class="form-control"
           placeholder="sankar@gmail.com"
         />
@@ -74,62 +80,93 @@
         <label>Symptoms</label>
         <select
           class="selectpicker form-control"
-          id="symp"
-          name="medic1"
+          id="sym"
+          name="sym"
           multiple
           data-live-search="true"
         >
-          <option value="1">fever</option>
-          <option value="2">dry cough</option>
-          <option value="3">tiredness</option>
-          <option value="4">aches and pains</option>
-          <option value="5">sore throat</option>
-          <option value="6">diarrhoea</option>
-          <option value="7">headache</option>
-          <option value="8">loss of taste or smell</option>
-          <option value="9">
+          <option value="fever">fever</option>
+          <option value="fever">dry cough</option>
+          <option value="tiredness">tiredness</option>
+          <option value="aches and pains">aches and pains</option>
+          <option value="sore throat">sore throat</option>
+          <option value="diarrhoea">diarrhoea</option>
+          <option value="headache">headache</option>
+          <option value="loss of taste or smell">loss of taste or smell</option>
+          <option value="a rash on skin, or discolouration of fingers or toes">
             a rash on skin, or discolouration of fingers or toes
           </option>
-          <option value="10">
+          <option value="difficulty breathing or shortness of breath">
             difficulty breathing or shortness of breath
           </option>
-          <option value="11">chest pain</option>
+          <option value="chest pain">chest pain</option>
         </select>
       </div>
       <div class="form-group">
         <label>Any diseases you suffered with</label>
         <textarea
           class="form-control"
-          name="medic2"
+          name="matter"
           rows="3"
           placeholder="diabetes, heart attack"
         ></textarea>
       </div>
       <div class="form-group">
         <label>Have you travelled anywhere these days ?</label><br />
-        <select name="" id="">
+        <select id="travel">
           <option value="1">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
       <div class="form-group">
         <label>Are you a volunteer or covid worker ?</label><br />
-        <select name="" id="">
+        <select id="volunteer">
           <option value="1">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
       <div class="form-group">
         <label>Have you got in contact with any covid patient ?</label><br />
-        <select name="" id="">
+        <select id="covid">
           <option value="1">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
+      <button type="submit" id="submit" class="btn btn-primary">submit</button>
     </form>
     <script>
       $("select").selectpicker();
-      console.log($("select[name='medic1']").val());
+      $("#submit").click(function (e) {
+        e.preventDefault();
+        var letters = /^[a-zA-Z _ ]*$/;
+        if (!$("#name").val().match(letters)) {
+          alert("Name fields should contain only alphabets");
+          return;
+        }
+
+        var check = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+        if (!$("#email").val().match(check)) {
+          alert("Enter valid email id");
+          return;
+        }
+        $.post(
+          "/riskpredictor",
+          {
+            name: $("#name").val(),
+            email: $("#email").val(),
+            matter: $("select[name='sym']").val().join(","),
+            score:
+              +$("#covid").val() +
+              +$("#travel").val() +
+              +$("#volunteer").val() +
+              $("select[name='sym']").val().length,
+          },
+          function (data, status) {
+            alert(data.score);
+            console.log(data);
+          }
+        );
+      });
     </script>
   </body>
 </html>
