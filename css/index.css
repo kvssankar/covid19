@@ -1,5 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   overflow-x: hidden;
 }
 
