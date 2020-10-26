@@ -23,8 +23,9 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="form.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   </head>
-  <body>
+  <body ng-app="validateApp" ng-controller="validateCrtl">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/">Covid Stats</a>
       <button
@@ -40,17 +41,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="/"
-            >Home <span class="sr-only">(current)</span></a
-          >
-          <!-- <a class="nav-item nav-link" href="self.html">Self assesment</a> -->
-          <a class="nav-item nav-link" href="/volunteer">Volunteer</a>
+          <a class="nav-item nav-link" href="/">Home </a>
+          <a class="nav-item nav-link" href="/riskpredictor">Riskpredictor</a>
+          <a class="nav-item nav-link active" href="/volunteer">Volunteer</a>
           <a class="nav-item nav-link" href="/contactus">Contact us</a>
         </div>
       </div>
     </nav>
     <div class="testbox">
-      <form action="/volunteer" method="post">
+      <form action="/volunteer" method="post" name="volunteer-form">
         <div class="banner">
           <h1>Volunteer Signup</h1>
         </div>
@@ -64,31 +63,62 @@
         <div class="colums">
           <div class="item">
             <label for="name">Name<span>*</span></label>
-            <input id="name" type="text" name="name" required />
+            <input id="name" ng-model="name" type="text" name="name" required />
           </div>
           <div class="item">
             <label for="eaddress">Email Address<span>*</span></label>
-            <input id="eaddress" type="text" name="eaddress" required />
+            <input
+              id="eaddress"
+              ng-model="email"
+              type="text"
+              name="eaddress"
+              required
+            />
           </div>
           <div class="item">
             <label for="phone">Phone<span>*</span></label>
-            <input id="phone" type="tel" name="phone" required />
+            <input
+              id="phone"
+              ng-model="phone"
+              type="tel"
+              name="phone"
+              required
+            />
           </div>
           <div class="item">
             <label for="street">Street<span>*</span></label>
-            <input id="street" type="text" name="street" required />
+            <input
+              id="street"
+              ng-model="street"
+              type="text"
+              name="street"
+              required
+            />
           </div>
           <div class="item">
             <label for="city">City<span>*</span></label>
-            <input id="city" type="text" name="city" required />
+            <input id="city" ng-model="city" type="text" name="city" required />
           </div>
           <div class="item">
             <label for="state">State<span>*</span></label>
-            <input id="state" type="text" name="state" required />
+            <input
+              id="state"
+              ng-model="state"
+              type="text"
+              name="state"
+              required
+            />
           </div>
           <div class="item">
             <label for="zip">Zip<span>*</span></label>
-            <input id="zip" type="text" name="zip" required />
+            <input
+              id="zip"
+              ng-model="zip"
+              type="text"
+              name="zip"
+              required
+              zip-validate
+            />
           </div>
         </div>
         <div class="question">
@@ -233,9 +263,71 @@
           </div>
         </div>
         <div class="btn-block">
-          <button type="submit">Submit</button>
+          <button type="submit" ng-click="checkValidationOnClick($event)">
+            Submit
+          </button>
         </div>
       </form>
     </div>
+    <script>
+      var app = angular.module("validateApp", []);
+      app.controller("validateCrtl", function ($scope) {
+        $scope.name = "";
+        $scope.email = "";
+        $scope.phone = 0;
+        $scope.state = "";
+        $scope.city = "";
+        $scope.zip = 0;
+        $scope.checkValidationOnClick = function ($event) {
+          var flag = 0;
+          if (
+            $scope.name == "" ||
+            $scope.email == "" ||
+            $scope.phone == "" ||
+            $scope.state == "" ||
+            $scope.city == "" ||
+            $scope.zip == ""
+          ) {
+            alert("All fields are mandatory and have to be entered");
+
+            $event.preventDefault();
+            flag = 1;
+          }
+          var letters = /^[a-zA-Z _ ]*$/;
+          if (
+            !$scope.name.match(letters) ||
+            !$scope.state.match(letters) ||
+            !$scope.city.match(letters)
+          ) {
+            alert("Name fields should contain only alphabets");
+            $event.preventDefault();
+
+            flag = 1;
+          }
+
+          var check = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+          if (!$scope.email.match(check)) {
+            alert("Enter valid email id");
+            $event.preventDefault();
+
+            flag = 1;
+          }
+          var numbers = /^[0-9]*$/;
+          if (!$scope.phone.match(numbers)) {
+            alert("Enter only numbers in phone number field");
+
+            $event.preventDefault();
+            flag = 1;
+          }
+          var decimalCheck = /\d{6}/;
+          if (!$scope.zip.match(decimalCheck)) {
+            alert("Zip should have 6 digit number");
+
+            $event.preventDefault();
+            flag = 1;
+          }
+        };
+      });
+    </script>
   </body>
 </html>
