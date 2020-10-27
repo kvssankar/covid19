@@ -14,9 +14,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="contact.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <title>Contact us</title>
   </head>
-  <body>
+  <body ng-app="validateApp" ng-controller="validateCrtl">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/">Covid Stats</a>
       <button
@@ -59,6 +60,7 @@
             type="text"
             placeholder="My name is"
             name="name"
+            ng-model="name"
             id="name_input"
             required
           />
@@ -69,6 +71,7 @@
             type="email"
             placeholder="My e-mail is"
             name="email"
+            ng-model="email"
             id="email_input"
             required
           />
@@ -79,6 +82,7 @@
             type="text"
             placeholder="My number is"
             name="phone"
+            ng-model="phone"
             id="telephone_input"
             required
           />
@@ -110,16 +114,67 @@
             placeholder="I'd like to chat about"
             id="message_input"
             cols="30"
+            ng-model="matter"
             rows="5"
             required
           ></textarea>
         </div>
         <div class="submit">
-          <input type="submit" value="Send Message" id="form_button" />
+          <input
+            type="submit"
+            value="Send Message"
+            id="form_button"
+            ng-click="checkValidationOnClick($event)"
+          />
         </div>
       </form>
       <!-- // End form -->
     </div>
-    <!-- // End #container -->
+    <script>
+      var app = angular.module("validateApp", []);
+      app.controller("validateCrtl", function ($scope) {
+        $scope.name = "";
+        $scope.email = "";
+        $scope.phone = 0;
+        $scope.state = "";
+        $scope.city = "";
+        $scope.zip = 0;
+        $scope.checkValidationOnClick = function ($event) {
+          var flag = 0;
+          if (
+            $scope.name == "" ||
+            $scope.email == "" ||
+            $scope.matter == "" ||
+            $scope.phone == ""
+          ) {
+            alert("All fields are mandatory and have to be entered");
+
+            $event.preventDefault();
+            flag = 1;
+          }
+          var letters = /^[a-zA-Z _ ]*$/;
+          if (!$scope.name.match(letters) || !$scope.matter.match(letters)) {
+            alert("Name fields should contain only alphabets");
+            $event.preventDefault();
+            flag = 1;
+          }
+
+          var check = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+          if (!$scope.email.match(check)) {
+            alert("Enter valid email id");
+            $event.preventDefault();
+
+            flag = 1;
+          }
+          var numbers = /^[0-9]*$/;
+          if (!$scope.phone.match(numbers)) {
+            alert("Enter only numbers in phone number field");
+
+            $event.preventDefault();
+            flag = 1;
+          }
+        };
+      });
+    </script>
   </body>
 </html>
