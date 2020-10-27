@@ -3,13 +3,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bp=require("body-parser");
 const app = express();
+
 app.use(bp.json());
 app.use(bp.urlencoded({
     extended: true
   }));
 
 app.use(express.static(__dirname + '/public'));
-//keys
+
 const db = "mongodb+srv://kvssankar:sankarvishnu23@cluster1.uacfw.mongodb.net/webproj?retryWrites=true&w=majority";
 
 var userSchema = new mongoose.Schema({
