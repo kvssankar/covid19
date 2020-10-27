@@ -8,7 +8,7 @@ app.use(bp.urlencoded({
     extended: true
   }));
 
-app.use(express.static(__dirname + '/css'));
+app.use(express.static(__dirname + '/public'));
 //keys
 const db = "mongodb+srv://kvssankar:sankarvishnu23@cluster1.uacfw.mongodb.net/webproj?retryWrites=true&w=majority";
 
