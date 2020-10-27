@@ -85,21 +85,19 @@
           multiple
           data-live-search="true"
         >
-          <option value="fever">fever</option>
-          <option value="fever">dry cough</option>
-          <option value="tiredness">tiredness</option>
-          <option value="aches and pains">aches and pains</option>
-          <option value="sore throat">sore throat</option>
-          <option value="diarrhoea">diarrhoea</option>
-          <option value="headache">headache</option>
-          <option value="loss of taste or smell">loss of taste or smell</option>
-          <option value="a rash on skin, or discolouration of fingers or toes">
+          <option value="1">fever</option>
+          <option value="1">dry cough</option>
+          <option value="1">tiredness</option>
+          <option value="2">aches and pains</option>
+          <option value="2">sore throat</option>
+          <option value="3">diarrhoea</option>
+          <option value="2">headache</option>
+          <option value="4">loss of taste or smell</option>
+          <option value="4">
             a rash on skin, or discolouration of fingers or toes
           </option>
-          <option value="difficulty breathing or shortness of breath">
-            difficulty breathing or shortness of breath
-          </option>
-          <option value="chest pain">chest pain</option>
+          <option value="5">difficulty breathing or shortness of breath</option>
+          <option value="6">chest pain</option>
         </select>
       </div>
       <div class="form-group">
@@ -114,21 +112,21 @@
       <div class="form-group">
         <label>Have you travelled anywhere these days ?</label><br />
         <select id="travel">
-          <option value="1">Yes</option>
+          <option value="4">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
       <div class="form-group">
         <label>Are you a volunteer or covid worker ?</label><br />
         <select id="volunteer">
-          <option value="1">Yes</option>
+          <option value="5">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
       <div class="form-group">
         <label>Have you got in contact with any covid patient ?</label><br />
         <select id="covid">
-          <option value="1">Yes</option>
+          <option value="5">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
@@ -142,15 +140,15 @@
         </thead>
         <tbody>
           <tr class="table-success">
-            <th scope="row">1-4</th>
+            <th scope="row">1-10</th>
             <td>Low</td>
           </tr>
           <tr class="table-warning">
-            <th scope="row">5-9</th>
+            <th scope="row">11-20</th>
             <td>Medium</td>
           </tr>
           <tr class="table-danger">
-            <th scope="row">9-14</th>
+            <th scope="row">20-30</th>
             <td>High</td>
           </tr>
         </tbody>
@@ -195,8 +193,11 @@
               +$("#covid").val() +
               +$("#travel").val() +
               +$("#volunteer").val() +
-              $("select[name='sym']").val().length +
-              2,
+              $("select[name='sym']")
+                .val()
+                .reduce(function (a, b) {
+                  return +a + +b;
+                }, 0),
           },
           function (data, status) {
             $("#bar")
